@@ -17,4 +17,10 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::get('/home', 'HomeController@index');
 
+Route::resource('task', 'TaskController', ['except'=>['show']]);
+
+//Route:get('');
+//Route:get('/task','TaskController@index');
+//Route:get('/task/create', 'TaskController@create');
