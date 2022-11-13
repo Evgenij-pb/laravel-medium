@@ -26,6 +26,6 @@ class TaskPolicy
      * @return bool
      */
     public function owner(User $user, Task $task){
-        return $user->id ===$task->user_id;
+        return $user->id === $task->user_id;
     }
 }

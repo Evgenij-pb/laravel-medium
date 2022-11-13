@@ -72,12 +72,16 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Task $task
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        //
+        //$this->authorize('owner',$task);
+        return view('tasks.edit',[
+            'task'=>$task//$user ->task,
+        ]);
+
     }
 
     /**
@@ -87,9 +91,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|max:25'
+        ]);
+
+        //$this->authorize('owner',$task);
+        $task ->name=$request -> name;
+        $task->save();
+        return redirect(route('task.index'));
     }
 
     /**
