@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Task;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use App\User;
 class TaskPolicy
 {
     use HandlesAuthorization;
