@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 
@@ -77,9 +77,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //$this->authorize('owner',$task);
+        $this->authorize('owner',$task);
         return view('tasks.edit',[
-            'task'=>$task//$user ->task,
+            'task'=>$task,
         ]);
 
     }
@@ -94,10 +94,10 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $this->validate($request,[
-            'name'=>'required|max:25'
+            'name'=>'required|max:15'
         ]);
 
-        //$this->authorize('owner',$task);
+        $this->authorize('owner',$task);
         $task ->name=$request -> name;
         $task->save();
         return redirect(route('task.index'));
@@ -112,6 +112,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
 
     {
+
         $this->authorize('owner',$task);
         
         $task->delete();
